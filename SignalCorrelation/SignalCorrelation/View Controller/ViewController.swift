@@ -8,21 +8,30 @@
 
 
 import Cocoa
+import Charts
 
 class ViewController: NSViewController {
 
+    // MARK: - Outlets
+    @IBOutlet private weak var directTimeTextField: NSTextField!
+    @IBOutlet private weak var fastTimeTextField: NSTextField!
+    @IBOutlet private weak var lineChartView: LineChartView!
+    @IBOutlet private weak var signalComboBox: NSComboBox!
+    
+    // MARK: - Override
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.setupUI()
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+    
+    // MARK: - Methods
+    private func setupUI() {
+        self.signalComboBox.selectItem(at: 0)
     }
-
-
+    
+    private func setTime(_ direct: String, _ fast: String) {
+        self.directTimeTextField.stringValue = "\(direct)ms"
+        self.fastTimeTextField.stringValue = "\(fast)ms"
+    }
 }
-
