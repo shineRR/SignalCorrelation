@@ -22,20 +22,20 @@ enum SignalType: Int {
     static subscript(signal: SignalType) -> SignalComponent {
         switch signal {
         case .sine:
-            return (ConstantSignal.sine, signal)
+            return (Constants.sine, signal)
         case .impulse:
-            return (ConstantSignal.impulse, signal)
+            return (Constants.impulse, signal)
         case .triangle:
-            return (ConstantSignal.triangle, signal)
+            return (Constants.triangle, signal)
         case .whitenoise:
-            return (ConstantSignal.whitenoise, signal)
+            return (Constants.whitenoise, signal)
         case.sawtooth:
-            return (ConstantSignal.sawtooth, signal)
+            return (Constants.sawtooth, signal)
         }
     }
 }
 
-struct ConstantSignal {
+struct Constants {
     static var duty = Float.pi
     static let doublePi = 2 * Float.pi
     static let frameCount = 512

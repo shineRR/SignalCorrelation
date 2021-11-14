@@ -713,14 +713,11 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="XMr-hg-ITt" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="215" y="101" width="715" height="372"/>
                             </customView>
-                            <stackView distribution="fillProportionally" orientation="horizontal" alignment="top" spacing="41" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GKO-40-Go1">
+                            <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="30" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GKO-40-Go1">
                                 <rect key="frame" x="330" y="40" width="300" height="21"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Igm-Et-x2m">
-                                        <rect key="frame" x="0.0" y="0.0" width="130" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="130" id="ban-Xx-XwP"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="0.0" width="135" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0.25ms" drawsBackground="YES" id="ICn-WC-Cig">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -728,7 +725,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rX0-8C-Fg7">
-                                        <rect key="frame" x="171" y="0.0" width="129" height="21"/>
+                                        <rect key="frame" x="165" y="0.0" width="135" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0.25ms" drawsBackground="YES" id="4WN-fY-Vam">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -737,7 +734,6 @@
                                     </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="rX0-8C-Fg7" firstAttribute="width" secondItem="Igm-Et-x2m" secondAttribute="width" multiplier="0.992308" id="fmE-qp-uMO"/>
                                     <constraint firstAttribute="width" constant="300" id="o5d-u2-rGl"/>
                                 </constraints>
                                 <visibilityPriorities>
@@ -913,6 +909,7 @@
                         <outlet property="directTimeTextField" destination="Igm-Et-x2m" id="q31-zF-6ba"/>
                         <outlet property="fastTimeTextField" destination="rX0-8C-Fg7" id="rXW-dv-eH2"/>
                         <outlet property="lineChartView" destination="XMr-hg-ITt" id="jVg-Rv-dsT"/>
+                        <outlet property="secondSignalComboBox" destination="FS3-uG-nhd" id="rfB-7g-RGR"/>
                         <outlet property="signalComboBox" destination="UuW-gN-5vS" id="vge-jg-f0V"/>
                     </connections>
                 </viewController>

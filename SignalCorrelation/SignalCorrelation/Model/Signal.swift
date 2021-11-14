@@ -36,7 +36,7 @@ final class Signal: SignalModulation {
         self.amplitude = amplitude
         self.currentPhase = currentPhase
         
-        self.incrementPhaseValue = ConstantSignal.doublePi / Float(ConstantSignal.frameCount) * frequency
+        self.incrementPhaseValue = Constants.doublePi / Float(Constants.frameCount) * frequency
     }
     
     // MARK: - Methods
@@ -62,11 +62,11 @@ final class Signal: SignalModulation {
     
     func incrementPhase() {
         self.currentPhase += self.incrementPhaseValue
-        if self.currentPhase >= ConstantSignal.doublePi {
-            self.currentPhase -= ConstantSignal.doublePi
+        if self.currentPhase >= Constants.doublePi {
+            self.currentPhase -= Constants.doublePi
         }
         if self.currentPhase < 0.0 {
-            self.currentPhase += ConstantSignal.doublePi
+            self.currentPhase += Constants.doublePi
         }
     }
 }

@@ -7,4 +7,6 @@ target 'SignalCorrelation' do
 
   # Pods for SignalCorrelation
   pod 'Charts'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 end

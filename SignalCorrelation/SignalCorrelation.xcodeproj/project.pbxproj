@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		159526577BC76154AA08483E /* Pods_SignalCorrelation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32ECCACF2BA7169E03369A35 /* Pods_SignalCorrelation.framework */; };
+		CA2ED8D827419D8500B6C77A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2ED8D727419D8500B6C77A /* ViewModel.swift */; };
+		CA2ED8DB2741AB8000B6C77A /* Сorrelator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2ED8DA2741AB8000B6C77A /* Сorrelator.swift */; };
 		CA91DE19273C35C90060B58E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA91DE18273C35C90060B58E /* AppDelegate.swift */; };
 		CA91DE1B273C35C90060B58E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA91DE1A273C35C90060B58E /* ViewController.swift */; };
 		CA91DE1D273C35CB0060B58E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA91DE1C273C35CB0060B58E /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 /* Begin PBXFileReference section */
 		32ECCACF2BA7169E03369A35 /* Pods_SignalCorrelation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SignalCorrelation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85259D99B37307C619E241E2 /* Pods-SignalCorrelation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignalCorrelation.release.xcconfig"; path = "Target Support Files/Pods-SignalCorrelation/Pods-SignalCorrelation.release.xcconfig"; sourceTree = "<group>"; };
+		CA2ED8D727419D8500B6C77A /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		CA2ED8DA2741AB8000B6C77A /* Сorrelator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сorrelator.swift"; sourceTree = "<group>"; };
 		CA91DE15273C35C90060B58E /* SignalCorrelation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalCorrelation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA91DE18273C35C90060B58E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA91DE1A273C35C90060B58E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +59,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CA2ED8D92741AB2600B6C77A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CA2ED8DA2741AB8000B6C77A /* Сorrelator.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		CA91DE0C273C35C90060B58E = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +88,7 @@
 		CA91DE17273C35C90060B58E /* SignalCorrelation */ = {
 			isa = PBXGroup;
 			children = (
+				CA2ED8D92741AB2600B6C77A /* Helpers */,
 				CA91DE2E273C48A60060B58E /* Components */,
 				CA91DE31273C48C00060B58E /* Model */,
 				CA91DE2B273C48960060B58E /* Extensions */,
@@ -99,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				CA91DE1A273C35C90060B58E /* ViewController.swift */,
+				CA2ED8D727419D8500B6C77A /* ViewModel.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -273,6 +287,8 @@
 				CA91DE1B273C35C90060B58E /* ViewController.swift in Sources */,
 				CA91DE30273C48A60060B58E /* NSRadioButton.swift in Sources */,
 				CA91DE19273C35C90060B58E /* AppDelegate.swift in Sources */,
+				CA2ED8DB2741AB8000B6C77A /* Сorrelator.swift in Sources */,
+				CA2ED8D827419D8500B6C77A /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
