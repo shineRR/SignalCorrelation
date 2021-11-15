@@ -82,6 +82,9 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
     private func autocorrelation(for signal: Signal) {
         let values = self.formValues(for: signal)
         let correlated = Сorrelator.autocorrelation(for: values)
+        
+        self.firstSignalBR.accept(values)
+        self.secondSignalBR.accept([])
         self.correlatedSignalBR.accept(correlated)
     }
     
@@ -89,12 +92,16 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
         guard let sSignal = sSignal else { return }
         let fValues = self.formValues(for: fSignal)
         let sValues = self.formValues(for: sSignal)
+        
         let startTime = DispatchTime.now()
         let correlated = Сorrelator.correlation(for: fValues, and: sValues)
         let endTime = DispatchTime.now()
         let time = Double(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds) / 1000000000
-        self.directTimeRS.onNext(String(format: "%.4f ms", time))
+        
+        self.firstSignalBR.accept(fValues)
+        self.secondSignalBR.accept(sValues)
         self.correlatedSignalBR.accept(correlated)
+        self.directTimeRS.onNext(String(format: "%.4f ms", time))
     }
     
     private func setupBindings() {
