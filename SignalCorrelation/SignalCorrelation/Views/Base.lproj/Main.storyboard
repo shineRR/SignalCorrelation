@@ -750,8 +750,8 @@
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="5f1-oK-aOp">
                                     <font key="font" metaFont="system"/>
                                     <segments>
-                                        <segment label="Direct" width="75" selected="YES"/>
-                                        <segment label="Fast" width="75" tag="1"/>
+                                        <segment label="Corr" width="75" selected="YES"/>
+                                        <segment label="Auto" width="75" tag="1"/>
                                     </segments>
                                 </segmentedCell>
                             </segmentedControl>
@@ -907,10 +907,18 @@
                     </view>
                     <connections>
                         <outlet property="directTimeTextField" destination="Igm-Et-x2m" id="q31-zF-6ba"/>
+                        <outlet property="fAmplitudeTextField" destination="FpJ-yX-jS4" id="Vy3-se-gqu"/>
+                        <outlet property="fFreqTextField" destination="gtT-Jh-HQO" id="jNY-Pv-vbr"/>
+                        <outlet property="fPhaseTextField" destination="6l7-Go-H7C" id="Mok-rd-CIh"/>
                         <outlet property="fastTimeTextField" destination="rX0-8C-Fg7" id="rXW-dv-eH2"/>
                         <outlet property="lineChartView" destination="XMr-hg-ITt" id="jVg-Rv-dsT"/>
+                        <outlet property="processButton" destination="AIg-vG-xbI" id="tTo-vc-NZd"/>
+                        <outlet property="sAmplitudeTextField" destination="8AJ-FD-T6C" id="5cz-oZ-vLg"/>
+                        <outlet property="sFreqTextField" destination="bPJ-In-u67" id="LBx-GW-x5O"/>
+                        <outlet property="sPhaseTextField" destination="gKK-7P-TGs" id="FOB-dY-SPl"/>
                         <outlet property="secondSignalComboBox" destination="FS3-uG-nhd" id="rfB-7g-RGR"/>
                         <outlet property="signalComboBox" destination="UuW-gN-5vS" id="vge-jg-f0V"/>
+                        <outlet property="typeSegmentedControl" destination="BoD-zM-sFY" id="WDw-Uk-XoS"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -14,27 +14,56 @@ import Charts
 class ViewController: NSViewController {
 
     // MARK: - Outlets
+    @IBOutlet private weak var typeSegmentedControl: NSSegmentedControl!
     @IBOutlet private weak var directTimeTextField: NSTextField!
     @IBOutlet private weak var fastTimeTextField: NSTextField!
     @IBOutlet private weak var lineChartView: LineChartView!
+    @IBOutlet private weak var processButton: NSButton!
+    
+    /// First signal
     @IBOutlet private weak var signalComboBox: NSComboBox!
+    @IBOutlet private weak var fAmplitudeTextField: NSTextField!
+    @IBOutlet private weak var fFreqTextField: NSTextField!
+    @IBOutlet private weak var fPhaseTextField: NSTextField!
+    
+    /// Second signal
     @IBOutlet private weak var secondSignalComboBox: NSComboBox!
+    @IBOutlet private weak var sAmplitudeTextField: NSTextField!
+    @IBOutlet private weak var sFreqTextField: NSTextField!
+    @IBOutlet private weak var sPhaseTextField: NSTextField!
     
     // MARK: - Properties
     private let viewModel: ViewModelType = ViewModel()
     private let disposeBag = DisposeBag()
+    private var isAutocorrelation: Bool {
+        return self.typeSegmentedControl.selectedSegment == 1
+    }
     
     // MARK: - Override
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setupUI()
-//        self.setupBindings()
-        self.viewModel.inputs.getCorrelatedSignal(nil, nil)
+        self.setupBindings()
     }
     
     // MARK: - Methods
     private func setupBindings() {
+        self.processButton.rx
+            .tap
+            .subscribe(onNext: { [weak self] in
+                self?.processCorrelation()
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.outputs
+            .lineChartData
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] data in
+                self?.lineChartView.data = data
+            })
+            .disposed(by: self.disposeBag)
+        
         self.viewModel.outputs
             .directTime
             .observe(on: MainScheduler.instance)
@@ -46,16 +75,56 @@ class ViewController: NSViewController {
             .observe(on: MainScheduler.instance)
             .bind(to: self.fastTimeTextField.rx.stringValue)
             .disposed(by: self.disposeBag)
+    }
+    
+    private func processCorrelation() {
+        guard let fType = SignalType(rawValue: self.signalComboBox.indexOfSelectedItem) else { return }
+        var sSignal: Signal?
+        let fSignal = self.createSignal(with: SignalType[fType], amplitude: self.fAmplitudeTextField.floatValue,
+                                        freq: self.fFreqTextField.floatValue,
+                                        phase: self.fPhaseTextField.floatValue)
+        if let sType = SignalType(rawValue: self.secondSignalComboBox.indexOfSelectedItem) {
+            sSignal = self.createSignal(with: SignalType[sType], amplitude: self.sAmplitudeTextField.floatValue,
+                                        freq: self.sFreqTextField.floatValue,
+                                        phase: self.sPhaseTextField.floatValue)
+        }
         
+        self.viewModel.inputs.getCorrelatedSignal(fSignal, sSignal, isAutocorrelation: self.isAutocorrelation)
+    }
+    
+    private func createSignal(with component: SignalComponent, amplitude: Float, freq: Float, phase: Float) -> Signal {
+        return Signal(signal: component, amplitude: amplitude,
+                      frequency: freq, currentPhase: phase)
+    }
+    
+    private func setupChart() {
+        self.lineChartView.rightAxis.enabled = false
+        self.lineChartView.dragEnabled = true
+        self.lineChartView.doubleTapToZoomEnabled = false
+        
+        let yAxis =  self.lineChartView.leftAxis
+        yAxis.drawGridLinesEnabled = false
+        yAxis.labelFont = .boldSystemFont(ofSize: 12)
+        yAxis.setLabelCount(6, force: false)
+        yAxis.valueFormatter = DefaultAxisValueFormatter(decimals: 100)
+        
+        let xAxis =  self.lineChartView.xAxis
+        xAxis.drawGridLinesEnabled = false
+        xAxis.drawLabelsEnabled = false
+        xAxis.labelPosition = .bottom
+        
+//        self.lineChartView.animate(xAxisDuration: 1.0, easingOption: .linear)
+    }
+    
+    private func setData(with set: LineChartDataSet) {
+        let data = LineChartData(dataSet: set)
+        data.setDrawValues(false)
+        self.lineChartView.data = data
     }
     
     private func setupUI() {
         self.signalComboBox.selectItem(at: 0)
         self.secondSignalComboBox.selectItem(at: 0)
-    }
-    
-    private func setTime(_ direct: String, _ fast: String) {
-        self.directTimeTextField.stringValue = "\(direct)ms"
-        self.fastTimeTextField.stringValue = "\(fast)ms"
+        self.setupChart()
     }
 }
