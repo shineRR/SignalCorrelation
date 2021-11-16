@@ -25,7 +25,6 @@ final class Сorrelator {
         return numerator / (sqrt(f) * sqrt(s))
     }
     
-    
     /// Correlation
     /// - Parameters:
     ///   - fValues: First signal.

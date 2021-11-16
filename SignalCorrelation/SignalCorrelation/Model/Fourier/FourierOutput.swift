@@ -10,11 +10,6 @@
 import Foundation
 
 class FFTFourierOutput: FourierOutput, SpectrumProtocol {
-    func nullReal() -> FourierOutput {
-        self.asin = .zero
-        return self
-    }
-    
     func getAmplitude() -> Float {
         let mul = 2.0 / Float(Constants.frameCount)
         return self.hypot() * mul
