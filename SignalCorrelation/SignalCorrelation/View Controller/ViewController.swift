@@ -17,6 +17,8 @@ class ViewController: NSViewController {
     @IBOutlet private weak var typeSegmentedControl: NSSegmentedControl!
     @IBOutlet private weak var directTimeTextField: NSTextField!
     @IBOutlet private weak var fastTimeTextField: NSTextField!
+    @IBOutlet private weak var fLineChartView: LineChartView!
+    @IBOutlet private weak var sLineChartView: LineChartView!
     @IBOutlet private weak var lineChartView: LineChartView!
     @IBOutlet private weak var processButton: NSButton!
     
@@ -53,6 +55,22 @@ class ViewController: NSViewController {
             .tap
             .subscribe(onNext: { [weak self] in
                 self?.processCorrelation()
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.outputs
+            .firstSignal
+            .map({ LineChartData(dataSet: $0) })
+            .subscribe(onNext: { dataSet in
+                self.fLineChartView.data = dataSet
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.outputs
+            .secondSignal
+            .map({ LineChartData(dataSet: $0) })
+            .subscribe(onNext: { dataSet in
+                self.sLineChartView.data = dataSet
             })
             .disposed(by: self.disposeBag)
         
@@ -97,18 +115,19 @@ class ViewController: NSViewController {
                       frequency: freq, currentPhase: phase)
     }
     
-    private func setupChart() {
-        self.lineChartView.rightAxis.enabled = false
-        self.lineChartView.dragEnabled = true
-        self.lineChartView.doubleTapToZoomEnabled = false
+    private func setupChart(with lineChartView: LineChartView, shouldDisableLeft: Bool = false) {
+        lineChartView.leftAxis.enabled = !shouldDisableLeft
+        lineChartView.rightAxis.enabled = false
+        lineChartView.dragEnabled = true
+        lineChartView.doubleTapToZoomEnabled = false
         
-        let yAxis =  self.lineChartView.leftAxis
+        let yAxis = lineChartView.leftAxis
         yAxis.drawGridLinesEnabled = false
         yAxis.labelFont = .boldSystemFont(ofSize: 12)
         yAxis.setLabelCount(6, force: false)
         yAxis.valueFormatter = DefaultAxisValueFormatter(decimals: 100)
         
-        let xAxis =  self.lineChartView.xAxis
+        let xAxis = lineChartView.xAxis
         xAxis.drawGridLinesEnabled = false
         xAxis.drawLabelsEnabled = false
         xAxis.labelPosition = .bottom
@@ -125,6 +144,8 @@ class ViewController: NSViewController {
     private func setupUI() {
         self.signalComboBox.selectItem(at: 0)
         self.secondSignalComboBox.selectItem(at: 0)
-        self.setupChart()
+        self.setupChart(with: self.fLineChartView)
+        self.setupChart(with: self.sLineChartView)
+        self.setupChart(with: self.lineChartView, shouldDisableLeft: true)
     }
 }

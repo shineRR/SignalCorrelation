@@ -22,9 +22,9 @@ protocol ViewModelInputs {
 }
 
 protocol ViewModelOutputs {
-    var firstSignal: Observable<[Float]> { get }
-    var secondSignal: Observable<[Float]> { get }
-    var correlatedSignal: Observable<[Float]> { get }
+    var firstSignal: Observable<LineChartDataSet>! { get }
+    var secondSignal: Observable<LineChartDataSet>! { get }
+    var correlatedSignal: Observable<LineChartDataSet>! { get }
     var lineChartData: Observable<LineChartData> { get }
     var directTime: Observable<String> { get }
     var fastTime: Observable<String> { get }
@@ -44,9 +44,9 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
     
     // MARK: - Observables
     var lineChartData: Observable<LineChartData>
-    var firstSignal: Observable<[Float]>
-    var secondSignal: Observable<[Float]>
-    var correlatedSignal: Observable<[Float]>
+    var firstSignal: Observable<LineChartDataSet>!
+    var secondSignal: Observable<LineChartDataSet>!
+    var correlatedSignal: Observable<LineChartDataSet>!
     var directTime: Observable<String>
     var fastTime: Observable<String>
     
@@ -64,11 +64,14 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
     // MARK: - Init
     init() {
         self.lineChartData = self.lineChartDataRS
-        self.correlatedSignal = self.correlatedSignalBR.asObservable()
-        self.firstSignal = self.firstSignalBR.asObservable()
-        self.secondSignal = self.secondSignalBR.asObservable()
         self.directTime = self.directTimeRS
         self.fastTime = self.fastTimeRS
+        self.correlatedSignal = self.correlatedSignalBR.asObservable()
+            .map({ self.createDataSet(color: Consts.correlatedColor, label: Consts.correlatedSignalTitle, values: $0) })
+        self.firstSignal = self.firstSignalBR.asObservable()
+            .map({ self.createDataSet(color: Consts.firstColor, label: Consts.firstSignalTitle, values: $0) })
+        self.secondSignal = self.secondSignalBR.asObservable()
+            .map({ self.createDataSet(color: Consts.secondColor, label: Consts.secondSignalTitle, values: $0) })
         
         self.setupBindings()
     }
@@ -81,7 +84,7 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
     
     private func autocorrelation(for signal: Signal) {
         let values = self.formValues(for: signal)
-        let correlated = Сorrelator.autocorrelation(for: values)
+        let correlated = Сorrelator.correlation(for: values, and: values)
         
         self.firstSignalBR.accept(values)
         self.secondSignalBR.accept([])
@@ -105,20 +108,11 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
     }
     
     private func setupBindings() {
-        let firstSignalValues = self.firstSignal
-            .map({ self.createDataSet(color: Consts.firstColor, label: Consts.firstSignalTitle, values: $0) })
-        
-        let secondSignalValues = self.secondSignal
-            .map({ self.createDataSet(color: Consts.secondColor, label: Consts.secondSignalTitle, values: $0) })
-        
-        let correlatedValues = self.correlatedSignal
-            .map({ self.createDataSet(color: Consts.correlatedColor, label: Consts.correlatedSignalTitle, values: $0) })
-        
-        _ = Observable.combineLatest(firstSignalValues,
-                                     secondSignalValues,
-                                     correlatedValues,
-                                     resultSelector: { (first, second, correlated) -> LineChartData  in
-            return LineChartData(dataSets: [first, second, correlated])
+        _ = Observable.combineLatest(self.firstSignal,
+                                     self.secondSignal,
+                                     self.correlatedSignal,
+                                     resultSelector: { (_, _, correlated) -> LineChartData  in
+            return LineChartData(dataSets: [correlated])
         })
             .bind(to: self.lineChartDataRS)
             .disposed(by: self.disposeBag)

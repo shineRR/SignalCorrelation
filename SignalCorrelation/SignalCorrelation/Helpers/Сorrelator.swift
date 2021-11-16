@@ -32,9 +32,9 @@ final class Сorrelator {
     ///   - sValues: Second signal
     /// - Returns: (f * s)(t)
     static func correlation(for fValues: [Float], and sValues: [Float]) -> [Float] {
-        let k = fValues.count + sValues.count - 2
+        let k = fValues.count// + sValues.count - 2
         var result: [Float] = []
-        for n in 0..<k {
+        for n in -k..<k {
             var sum: Float = 0.0
             for m in 0..<sValues.count {
                 let index = n + m
@@ -49,7 +49,7 @@ final class Сorrelator {
     
     static func autocorrelation(for values: [Float]) -> [Float] {
         var result: [Float] = []
-        for n in 0..<values.count {
+        for n in 0..<(2 * values.count) {
             var sum: Float = 0.0
             for m in 0..<values.count {
                 let index = n - m

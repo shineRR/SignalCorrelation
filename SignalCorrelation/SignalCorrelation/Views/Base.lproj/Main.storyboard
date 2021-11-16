@@ -707,14 +707,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="SignalCorrelation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="960" height="503"/>
+                        <rect key="frame" x="0.0" y="0.0" width="985" height="555"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="XMr-hg-ITt" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="215" y="101" width="715" height="372"/>
-                            </customView>
                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="30" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GKO-40-Go1">
-                                <rect key="frame" x="330" y="40" width="300" height="21"/>
+                                <rect key="frame" x="343" y="40" width="300" height="21"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Igm-Et-x2m">
                                         <rect key="frame" x="0.0" y="0.0" width="135" height="21"/>
@@ -746,7 +743,7 @@
                                 </customSpacing>
                             </stackView>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BoD-zM-sFY">
-                                <rect key="frame" x="28" y="450" width="159" height="24"/>
+                                <rect key="frame" x="28" y="502" width="179" height="24"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="5f1-oK-aOp">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -756,7 +753,7 @@
                                 </segmentedCell>
                             </segmentedControl>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UuW-gN-5vS">
-                                <rect key="frame" x="45" y="398" width="128" height="25"/>
+                                <rect key="frame" x="55" y="450" width="128" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="YZf-I0-3jS"/>
                                 </constraints>
@@ -766,14 +763,15 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <objectValues>
                                         <string>Sine</string>
+                                        <string>Impulse</string>
                                         <string>Triangle</string>
                                         <string>Sawtooth</string>
-                                        <string>Square</string>
+                                        <string>Whitenoise</string>
                                     </objectValues>
                                 </comboBoxCell>
                             </comboBox>
                             <stackView distribution="equalCentering" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CoO-2v-0K7">
-                                <rect key="frame" x="58" y="289" width="100" height="93"/>
+                                <rect key="frame" x="68" y="341" width="100" height="93"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FpJ-yX-jS4">
                                         <rect key="frame" x="0.0" y="72" width="96" height="21"/>
@@ -815,7 +813,7 @@
                                 </customSpacing>
                             </stackView>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FS3-uG-nhd">
-                                <rect key="frame" x="45" y="236" width="128" height="25"/>
+                                <rect key="frame" x="55" y="288" width="128" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="odz-q1-iRT"/>
                                 </constraints>
@@ -825,14 +823,15 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <objectValues>
                                         <string>Sine</string>
+                                        <string>Impulse</string>
                                         <string>Triangle</string>
                                         <string>Sawtooth</string>
-                                        <string>Square</string>
+                                        <string>Whitenoise</string>
                                     </objectValues>
                                 </comboBoxCell>
                             </comboBox>
                             <stackView distribution="equalCentering" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COw-J2-maX">
-                                <rect key="frame" x="58" y="127" width="100" height="93"/>
+                                <rect key="frame" x="68" y="179" width="100" height="93"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8AJ-FD-T6C">
                                         <rect key="frame" x="0.0" y="72" width="96" height="21"/>
@@ -874,7 +873,7 @@
                                 </customSpacing>
                             </stackView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AIg-vG-xbI">
-                                <rect key="frame" x="51" y="60" width="114" height="32"/>
+                                <rect key="frame" x="61" y="112" width="114" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="1av-dg-Cbn"/>
                                 </constraints>
@@ -883,10 +882,27 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="KB8-YW-jex" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="235" y="325" width="350" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="AHT-UF-KdP"/>
+                                </constraints>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="IcX-1U-Btv" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="605" y="325" width="350" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="GX5-Hj-ruh"/>
+                                </constraints>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="XMr-hg-ITt" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="235" y="81" width="720" height="224"/>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="GKO-40-Go1" secondAttribute="bottom" constant="40" id="1k9-zp-8CA"/>
+                            <constraint firstItem="IcX-1U-Btv" firstAttribute="leading" secondItem="KB8-YW-jex" secondAttribute="trailing" constant="20" id="2i7-VV-4O3"/>
                             <constraint firstItem="GKO-40-Go1" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="3BN-74-FLX"/>
+                            <constraint firstItem="IcX-1U-Btv" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="30" id="7YJ-sD-eTY"/>
                             <constraint firstItem="AIg-vG-xbI" firstAttribute="top" secondItem="COw-J2-maX" secondAttribute="bottom" constant="40" id="8Cq-hs-JZ7"/>
                             <constraint firstItem="FS3-uG-nhd" firstAttribute="top" secondItem="6l7-Go-H7C" secondAttribute="bottom" constant="30" id="Aaf-ZK-X9O"/>
                             <constraint firstItem="FS3-uG-nhd" firstAttribute="centerX" secondItem="UuW-gN-5vS" secondAttribute="centerX" id="Jlq-m5-Vom"/>
@@ -898,23 +914,30 @@
                             <constraint firstItem="BoD-zM-sFY" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="30" id="Wax-wB-Ny1"/>
                             <constraint firstItem="BoD-zM-sFY" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="30" id="XFQ-Be-eAa"/>
                             <constraint firstItem="AIg-vG-xbI" firstAttribute="centerX" secondItem="FS3-uG-nhd" secondAttribute="centerX" id="a8Q-wl-bZQ"/>
+                            <constraint firstItem="XMr-hg-ITt" firstAttribute="top" secondItem="KB8-YW-jex" secondAttribute="bottom" constant="20" id="ddA-gV-eVH"/>
+                            <constraint firstItem="IcX-1U-Btv" firstAttribute="height" secondItem="KB8-YW-jex" secondAttribute="height" id="e5a-1i-E3H"/>
+                            <constraint firstItem="KB8-YW-jex" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="30" id="k1s-o2-9Kv"/>
                             <constraint firstItem="UuW-gN-5vS" firstAttribute="centerX" secondItem="BoD-zM-sFY" secondAttribute="centerX" id="kv9-GA-fa5"/>
-                            <constraint firstItem="GKO-40-Go1" firstAttribute="top" secondItem="XMr-hg-ITt" secondAttribute="bottom" constant="40" id="pTH-EL-89E"/>
+                            <constraint firstItem="GKO-40-Go1" firstAttribute="top" secondItem="XMr-hg-ITt" secondAttribute="bottom" constant="20" id="pTH-EL-89E"/>
+                            <constraint firstItem="KB8-YW-jex" firstAttribute="leading" secondItem="BoD-zM-sFY" secondAttribute="trailing" constant="30" id="qVm-YY-FgG"/>
                             <constraint firstItem="COw-J2-maX" firstAttribute="top" secondItem="FS3-uG-nhd" secondAttribute="bottom" constant="20" id="sQ3-dB-G2u"/>
                             <constraint firstAttribute="trailing" secondItem="XMr-hg-ITt" secondAttribute="trailing" constant="30" id="uce-of-h4d"/>
-                            <constraint firstItem="XMr-hg-ITt" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="30" id="uu6-H4-0tt"/>
+                            <constraint firstItem="KB8-YW-jex" firstAttribute="width" secondItem="IcX-1U-Btv" secondAttribute="width" id="vTj-pj-Clg"/>
+                            <constraint firstAttribute="trailing" secondItem="IcX-1U-Btv" secondAttribute="trailing" constant="30" id="xeY-Cx-wu5"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="directTimeTextField" destination="Igm-Et-x2m" id="q31-zF-6ba"/>
                         <outlet property="fAmplitudeTextField" destination="FpJ-yX-jS4" id="Vy3-se-gqu"/>
                         <outlet property="fFreqTextField" destination="gtT-Jh-HQO" id="jNY-Pv-vbr"/>
+                        <outlet property="fLineChartView" destination="KB8-YW-jex" id="cM8-mE-8Nq"/>
                         <outlet property="fPhaseTextField" destination="6l7-Go-H7C" id="Mok-rd-CIh"/>
                         <outlet property="fastTimeTextField" destination="rX0-8C-Fg7" id="rXW-dv-eH2"/>
                         <outlet property="lineChartView" destination="XMr-hg-ITt" id="jVg-Rv-dsT"/>
                         <outlet property="processButton" destination="AIg-vG-xbI" id="tTo-vc-NZd"/>
                         <outlet property="sAmplitudeTextField" destination="8AJ-FD-T6C" id="5cz-oZ-vLg"/>
                         <outlet property="sFreqTextField" destination="bPJ-In-u67" id="LBx-GW-x5O"/>
+                        <outlet property="sLineChartView" destination="IcX-1U-Btv" id="rev-kG-rY3"/>
                         <outlet property="sPhaseTextField" destination="gKK-7P-TGs" id="FOB-dY-SPl"/>
                         <outlet property="secondSignalComboBox" destination="FS3-uG-nhd" id="rfB-7g-RGR"/>
                         <outlet property="signalComboBox" destination="UuW-gN-5vS" id="vge-jg-f0V"/>
@@ -923,7 +946,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="315" y="771.5"/>
+            <point key="canvasLocation" x="318.5" y="797.5"/>
         </scene>
     </scenes>
 </document>
