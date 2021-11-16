@@ -19,6 +19,7 @@ class ViewController: NSViewController {
     @IBOutlet private weak var fastTimeTextField: NSTextField!
     @IBOutlet private weak var fLineChartView: LineChartView!
     @IBOutlet private weak var sLineChartView: LineChartView!
+    @IBOutlet private weak var fastLineChartView: LineChartView!
     @IBOutlet private weak var lineChartView: LineChartView!
     @IBOutlet private weak var processButton: NSButton!
     
@@ -60,25 +61,33 @@ class ViewController: NSViewController {
         
         self.viewModel.outputs
             .firstSignal
-            .map({ LineChartData(dataSet: $0) })
-            .subscribe(onNext: { dataSet in
-                self.fLineChartView.data = dataSet
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { data in
+                self.fLineChartView.data = data
             })
             .disposed(by: self.disposeBag)
         
         self.viewModel.outputs
             .secondSignal
-            .map({ LineChartData(dataSet: $0) })
-            .subscribe(onNext: { dataSet in
-                self.sLineChartView.data = dataSet
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { data in
+                self.sLineChartView.data = data
             })
             .disposed(by: self.disposeBag)
         
         self.viewModel.outputs
-            .lineChartData
+            .directLineChartData
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] data in
                 self?.lineChartView.data = data
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.outputs
+            .fastLineChartData
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] data in
+                self?.fastLineChartView.data = data
             })
             .disposed(by: self.disposeBag)
         
@@ -146,6 +155,7 @@ class ViewController: NSViewController {
         self.secondSignalComboBox.selectItem(at: 0)
         self.setupChart(with: self.fLineChartView)
         self.setupChart(with: self.sLineChartView)
+        self.setupChart(with: self.fastLineChartView, shouldDisableLeft: true)
         self.setupChart(with: self.lineChartView, shouldDisableLeft: true)
     }
 }

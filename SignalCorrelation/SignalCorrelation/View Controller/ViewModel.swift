@@ -22,56 +22,70 @@ protocol ViewModelInputs {
 }
 
 protocol ViewModelOutputs {
-    var firstSignal: Observable<LineChartDataSet>! { get }
-    var secondSignal: Observable<LineChartDataSet>! { get }
-    var correlatedSignal: Observable<LineChartDataSet>! { get }
-    var lineChartData: Observable<LineChartData> { get }
+    var firstSignal: Observable<LineChartData> { get }
+    var secondSignal: Observable<LineChartData> { get }
+    var directLineChartData: Observable<LineChartData> { get }
+    var fastLineChartData: Observable<LineChartData> { get }
     var directTime: Observable<String> { get }
     var fastTime: Observable<String> { get }
 }
 
 class ViewModel: ViewModelInputs, ViewModelOutputs {
     
+    typealias CorrelationWork = ([Float], String)
+    
     // MARK: - Consts
     enum Consts {
+        static let zeroData = LineChartData(dataSets: [])
         static let firstSignalTitle = "First"
         static let secondSignalTitle = "Second"
         static let correlatedSignalTitle = "Correlated"
         static let firstColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
         static let secondColor = CGColor(red: 0, green: 1, blue: 0, alpha: 1)
         static let correlatedColor = CGColor(red: 0, green: 0, blue: 1, alpha: 1)
+        static let fastCorrelatedColor = CGColor(red: 0, green: 1, blue: 1, alpha: 1)
     }
     
     // MARK: - Observables
-    var lineChartData: Observable<LineChartData>
-    var firstSignal: Observable<LineChartDataSet>!
-    var secondSignal: Observable<LineChartDataSet>!
-    var correlatedSignal: Observable<LineChartDataSet>!
+    private var fSignal: Observable<[Float]>
+    private var sSignal: Observable<[Float]>
+    private var directSignal: Observable<[Float]>
+    private var fastSignal: Observable<[Float]>
+    var directLineChartData: Observable<LineChartData>
+    var fastLineChartData: Observable<LineChartData>
+    var firstSignal: Observable<LineChartData>
+    var secondSignal: Observable<LineChartData>
     var directTime: Observable<String>
     var fastTime: Observable<String>
     
     // MARK: - Subjects
-    private let firstSignalBR = BehaviorRelay<[Float]>(value: [])
-    private let secondSignalBR = BehaviorRelay<[Float]>(value: [])
-    private let correlatedSignalBR = BehaviorRelay<[Float]>(value: [])
-    private let lineChartDataRS = ReplaySubject<LineChartData>.create(bufferSize: 1)
+    private let firstSignalRS = ReplaySubject<LineChartData>.create(bufferSize: 1)
+    private let secondSignalRS = ReplaySubject<LineChartData>.create(bufferSize: 1)
+    private let directLineChartDataRS = ReplaySubject<LineChartData>.create(bufferSize: 1)
+    private let fastLineChartDataRS = ReplaySubject<LineChartData>.create(bufferSize: 1)
     private let directTimeRS = ReplaySubject<String>.create(bufferSize: 1)
     private let fastTimeRS = ReplaySubject<String>.create(bufferSize: 1)
+    
+    private let fSignalRS = ReplaySubject<[Float]>.create(bufferSize: 1)
+    private let sSignalRS = ReplaySubject<[Float]>.create(bufferSize: 1)
+    private let directSignalRS = ReplaySubject<[Float]>.create(bufferSize: 1)
+    private let fastSignalRS = ReplaySubject<[Float]>.create(bufferSize: 1)
     
     // MARK: - Properties
     private let disposeBag = DisposeBag()
     
     // MARK: - Init
     init() {
-        self.lineChartData = self.lineChartDataRS
+        self.fastLineChartData = self.fastLineChartDataRS
+        self.directLineChartData = self.directLineChartDataRS
         self.directTime = self.directTimeRS
         self.fastTime = self.fastTimeRS
-        self.correlatedSignal = self.correlatedSignalBR.asObservable()
-            .map({ self.createDataSet(color: Consts.correlatedColor, label: Consts.correlatedSignalTitle, values: $0) })
-        self.firstSignal = self.firstSignalBR.asObservable()
-            .map({ self.createDataSet(color: Consts.firstColor, label: Consts.firstSignalTitle, values: $0) })
-        self.secondSignal = self.secondSignalBR.asObservable()
-            .map({ self.createDataSet(color: Consts.secondColor, label: Consts.secondSignalTitle, values: $0) })
+        self.firstSignal = self.firstSignalRS
+        self.secondSignal = self.secondSignalRS
+        self.fSignal = self.fSignalRS
+        self.sSignal = self.sSignalRS
+        self.directSignal = self.directSignalRS
+        self.fastSignal = self.fastSignalRS
         
         self.setupBindings()
     }
@@ -84,11 +98,9 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
     
     private func autocorrelation(for signal: Signal) {
         let values = self.formValues(for: signal)
-        let correlated = Сorrelator.correlation(for: values, and: values)
         
-        self.firstSignalBR.accept(values)
-        self.secondSignalBR.accept([])
-        self.correlatedSignalBR.accept(correlated)
+        self.sendValues(fSignal: values)
+        self.prepareWork(for: values, and: values)
     }
     
     private func correlation(for fSignal: Signal, and sSignal: Signal?) {
@@ -96,25 +108,70 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
         let fValues = self.formValues(for: fSignal)
         let sValues = self.formValues(for: sSignal)
         
-        let startTime = DispatchTime.now()
-        let correlated = Сorrelator.correlation(for: fValues, and: sValues)
-        let endTime = DispatchTime.now()
-        let time = Double(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds) / 1000000000
+        self.sendValues(fSignal: fValues, sSignal: sValues)
+        self.prepareWork(for: fValues, and: sValues)
+    }
+    
+    private func sendValues(fSignal: [Float] = [], sSignal: [Float] = [],
+                            dSignal: [Float] = [], fastSignal: [Float] = []) {
+        self.fSignalRS.onNext(fSignal)
+        self.sSignalRS.onNext(sSignal)
+        self.directSignalRS.onNext(dSignal)
+        self.fastSignalRS.onNext(fastSignal)
+    }
+    
+    private func prepareWork(for fValues: [Float], and sValues: [Float]) {
+        self.performWork({ Сorrelator.correlation(for: fValues, and: sValues) })
+            .subscribe(onSuccess: { [weak self] values, time in
+                self?.directSignalRS.onNext(values)
+                self?.directTimeRS.onNext(time)
+            })
+            .disposed(by: self.disposeBag)
         
-        self.firstSignalBR.accept(fValues)
-        self.secondSignalBR.accept(sValues)
-        self.correlatedSignalBR.accept(correlated)
-        self.directTimeRS.onNext(String(format: "%.4f ms", time))
+        
+        self.performWork({ Сorrelator.fastCorrelation(for: fValues, and: sValues) })
+            .subscribe(onSuccess: { [weak self] values, time in
+                self?.fastSignalRS.onNext(values)
+                self?.fastTimeRS.onNext(time)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func performWork(_ action: @escaping (() -> [Float])) -> Single<CorrelationWork> {
+        return Single<CorrelationWork>.create { observer in
+            let startTime = DispatchTime.now()
+            let values = action()
+            let endTime = DispatchTime.now()
+            let time = Double(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds) / 1000000000
+            
+            observer(.success((values, String(format: "%.4f ms", time))))
+            return Disposables.create()
+        }
     }
     
     private func setupBindings() {
-        _ = Observable.combineLatest(self.firstSignal,
-                                     self.secondSignal,
-                                     self.correlatedSignal,
-                                     resultSelector: { (_, _, correlated) -> LineChartData  in
-            return LineChartData(dataSets: [correlated])
-        })
-            .bind(to: self.lineChartDataRS)
+        self.fSignal
+            .map({ self.createDataSet(color: Consts.firstColor, label: Consts.firstSignalTitle, values: $0) })
+            .map({ LineChartData(dataSet: $0)})
+            .bind(to: self.firstSignalRS)
+            .disposed(by: self.disposeBag)
+        
+        self.sSignal
+            .map({ self.createDataSet(color: Consts.secondColor, label: Consts.secondSignalTitle, values: $0) })
+            .map({ LineChartData(dataSet: $0)})
+            .bind(to: self.secondSignalRS)
+            .disposed(by: self.disposeBag)
+        
+        self.directSignal
+            .map({ self.createDataSet(color: Consts.correlatedColor, label: Consts.correlatedSignalTitle, values: $0) })
+            .map({ LineChartData(dataSet: $0)})
+            .bind(to: self.directLineChartDataRS)
+            .disposed(by: self.disposeBag)
+        
+        self.fastSignal
+            .map({ self.createDataSet(color: Consts.fastCorrelatedColor, label: Consts.correlatedSignalTitle, values: $0) })
+            .map({ LineChartData(dataSet: $0)})
+            .bind(to: self.fastLineChartDataRS)
             .disposed(by: self.disposeBag)
     }
     

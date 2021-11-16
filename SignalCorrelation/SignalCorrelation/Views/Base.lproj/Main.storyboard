@@ -707,7 +707,7 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="SignalCorrelation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="985" height="555"/>
+                        <rect key="frame" x="0.0" y="0.0" width="985" height="664"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="30" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GKO-40-Go1">
@@ -715,7 +715,7 @@
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Igm-Et-x2m">
                                         <rect key="frame" x="0.0" y="0.0" width="135" height="21"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0.25ms" drawsBackground="YES" id="ICn-WC-Cig">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0.00 ms" drawsBackground="YES" id="ICn-WC-Cig">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -723,7 +723,7 @@
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rX0-8C-Fg7">
                                         <rect key="frame" x="165" y="0.0" width="135" height="21"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0.25ms" drawsBackground="YES" id="4WN-fY-Vam">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0.00 ms" drawsBackground="YES" id="4WN-fY-Vam">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -743,7 +743,7 @@
                                 </customSpacing>
                             </stackView>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BoD-zM-sFY">
-                                <rect key="frame" x="28" y="502" width="179" height="24"/>
+                                <rect key="frame" x="28" y="611" width="179" height="24"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="5f1-oK-aOp">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -753,7 +753,7 @@
                                 </segmentedCell>
                             </segmentedControl>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UuW-gN-5vS">
-                                <rect key="frame" x="55" y="450" width="128" height="25"/>
+                                <rect key="frame" x="55" y="559" width="128" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="YZf-I0-3jS"/>
                                 </constraints>
@@ -771,7 +771,7 @@
                                 </comboBoxCell>
                             </comboBox>
                             <stackView distribution="equalCentering" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CoO-2v-0K7">
-                                <rect key="frame" x="68" y="341" width="100" height="93"/>
+                                <rect key="frame" x="68" y="450" width="100" height="93"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FpJ-yX-jS4">
                                         <rect key="frame" x="0.0" y="72" width="96" height="21"/>
@@ -813,7 +813,7 @@
                                 </customSpacing>
                             </stackView>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FS3-uG-nhd">
-                                <rect key="frame" x="55" y="288" width="128" height="25"/>
+                                <rect key="frame" x="55" y="397" width="128" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="odz-q1-iRT"/>
                                 </constraints>
@@ -831,7 +831,7 @@
                                 </comboBoxCell>
                             </comboBox>
                             <stackView distribution="equalCentering" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COw-J2-maX">
-                                <rect key="frame" x="68" y="179" width="100" height="93"/>
+                                <rect key="frame" x="68" y="288" width="100" height="93"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8AJ-FD-T6C">
                                         <rect key="frame" x="0.0" y="72" width="96" height="21"/>
@@ -873,7 +873,7 @@
                                 </customSpacing>
                             </stackView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AIg-vG-xbI">
-                                <rect key="frame" x="61" y="112" width="114" height="32"/>
+                                <rect key="frame" x="61" y="221" width="114" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="1av-dg-Cbn"/>
                                 </constraints>
@@ -883,29 +883,35 @@
                                 </buttonCell>
                             </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="KB8-YW-jex" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="235" y="325" width="350" height="200"/>
+                                <rect key="frame" x="235" y="434" width="350" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="AHT-UF-KdP"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="IcX-1U-Btv" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="605" y="325" width="350" height="200"/>
+                                <rect key="frame" x="605" y="434" width="350" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="GX5-Hj-ruh"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="XMr-hg-ITt" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="235" y="81" width="720" height="224"/>
+                                <rect key="frame" x="235" y="253" width="720" height="161"/>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="g6D-Pf-avN" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="235" y="81" width="720" height="162"/>
                             </customView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="GKO-40-Go1" secondAttribute="bottom" constant="40" id="1k9-zp-8CA"/>
                             <constraint firstItem="IcX-1U-Btv" firstAttribute="leading" secondItem="KB8-YW-jex" secondAttribute="trailing" constant="20" id="2i7-VV-4O3"/>
+                            <constraint firstItem="XMr-hg-ITt" firstAttribute="height" secondItem="g6D-Pf-avN" secondAttribute="height" id="312-m8-bbR"/>
                             <constraint firstItem="GKO-40-Go1" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="3BN-74-FLX"/>
+                            <constraint firstItem="g6D-Pf-avN" firstAttribute="top" secondItem="XMr-hg-ITt" secondAttribute="bottom" constant="10" id="6O7-zM-wNf"/>
                             <constraint firstItem="IcX-1U-Btv" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="30" id="7YJ-sD-eTY"/>
                             <constraint firstItem="AIg-vG-xbI" firstAttribute="top" secondItem="COw-J2-maX" secondAttribute="bottom" constant="40" id="8Cq-hs-JZ7"/>
                             <constraint firstItem="FS3-uG-nhd" firstAttribute="top" secondItem="6l7-Go-H7C" secondAttribute="bottom" constant="30" id="Aaf-ZK-X9O"/>
                             <constraint firstItem="FS3-uG-nhd" firstAttribute="centerX" secondItem="UuW-gN-5vS" secondAttribute="centerX" id="Jlq-m5-Vom"/>
+                            <constraint firstAttribute="trailing" secondItem="g6D-Pf-avN" secondAttribute="trailing" constant="30" id="M9v-Eu-4I2"/>
                             <constraint firstItem="CoO-2v-0K7" firstAttribute="top" secondItem="UuW-gN-5vS" secondAttribute="bottom" constant="20" id="PWd-HC-eSz"/>
                             <constraint firstItem="XMr-hg-ITt" firstAttribute="leading" secondItem="BoD-zM-sFY" secondAttribute="trailing" constant="30" id="Pew-4x-hGq"/>
                             <constraint firstItem="COw-J2-maX" firstAttribute="centerX" secondItem="FS3-uG-nhd" secondAttribute="centerX" id="Pzn-BN-oDc"/>
@@ -917,8 +923,9 @@
                             <constraint firstItem="XMr-hg-ITt" firstAttribute="top" secondItem="KB8-YW-jex" secondAttribute="bottom" constant="20" id="ddA-gV-eVH"/>
                             <constraint firstItem="IcX-1U-Btv" firstAttribute="height" secondItem="KB8-YW-jex" secondAttribute="height" id="e5a-1i-E3H"/>
                             <constraint firstItem="KB8-YW-jex" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="30" id="k1s-o2-9Kv"/>
+                            <constraint firstItem="g6D-Pf-avN" firstAttribute="leading" secondItem="BoD-zM-sFY" secondAttribute="trailing" constant="30" id="kUM-tU-QFe"/>
                             <constraint firstItem="UuW-gN-5vS" firstAttribute="centerX" secondItem="BoD-zM-sFY" secondAttribute="centerX" id="kv9-GA-fa5"/>
-                            <constraint firstItem="GKO-40-Go1" firstAttribute="top" secondItem="XMr-hg-ITt" secondAttribute="bottom" constant="20" id="pTH-EL-89E"/>
+                            <constraint firstItem="rX0-8C-Fg7" firstAttribute="top" secondItem="g6D-Pf-avN" secondAttribute="bottom" constant="20" id="owt-8H-3cJ"/>
                             <constraint firstItem="KB8-YW-jex" firstAttribute="leading" secondItem="BoD-zM-sFY" secondAttribute="trailing" constant="30" id="qVm-YY-FgG"/>
                             <constraint firstItem="COw-J2-maX" firstAttribute="top" secondItem="FS3-uG-nhd" secondAttribute="bottom" constant="20" id="sQ3-dB-G2u"/>
                             <constraint firstAttribute="trailing" secondItem="XMr-hg-ITt" secondAttribute="trailing" constant="30" id="uce-of-h4d"/>
@@ -932,6 +939,7 @@
                         <outlet property="fFreqTextField" destination="gtT-Jh-HQO" id="jNY-Pv-vbr"/>
                         <outlet property="fLineChartView" destination="KB8-YW-jex" id="cM8-mE-8Nq"/>
                         <outlet property="fPhaseTextField" destination="6l7-Go-H7C" id="Mok-rd-CIh"/>
+                        <outlet property="fastLineChartView" destination="g6D-Pf-avN" id="kkT-Kk-HXL"/>
                         <outlet property="fastTimeTextField" destination="rX0-8C-Fg7" id="rXW-dv-eH2"/>
                         <outlet property="lineChartView" destination="XMr-hg-ITt" id="jVg-Rv-dsT"/>
                         <outlet property="processButton" destination="AIg-vG-xbI" id="tTo-vc-NZd"/>
@@ -946,7 +954,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="318.5" y="797.5"/>
+            <point key="canvasLocation" x="318.5" y="852"/>
         </scene>
     </scenes>
 </document>

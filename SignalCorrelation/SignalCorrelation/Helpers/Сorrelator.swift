@@ -32,19 +32,30 @@ final class Сorrelator {
     ///   - sValues: Second signal
     /// - Returns: (f * s)(t)
     static func correlation(for fValues: [Float], and sValues: [Float]) -> [Float] {
-        let k = fValues.count// + sValues.count - 2
+        let N = Constants.frameCount
         var result: [Float] = []
-        for n in -k..<k {
+        for n in 0..<N {
             var sum: Float = 0.0
-            for m in 0..<sValues.count {
-                let index = n + m
-                guard index > -1 && fValues.count > index else { continue }
-                sum += fValues[index] * sValues[m]
+            for m in 0..<N {
+                sum += fValues[m] * sValues[(m + n + N) % N]
             }
-            result.append(sum)
+            result.append(sum / Float(N))
         }
         
         return result
+    }
+    
+    static func fastCorrelation(for fValues: [Float], and sValues: [Float]) -> [Float] {
+        var result: [FFTFourierOutput] = []
+
+        let fFFT = Fourier.fft(with: fValues).map({ $0.conjugate() })
+        let sFFT = Fourier.fft(with: sValues)
+        
+        for i in 0..<fFFT.count {
+            result.append(FFTFourierOutput(fFFT[i] * sFFT[i]))
+        }
+        
+        return Fourier.restoreFFT(with: result)
     }
     
     static func autocorrelation(for values: [Float]) -> [Float] {

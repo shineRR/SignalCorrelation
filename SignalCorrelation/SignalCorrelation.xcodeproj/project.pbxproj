@@ -18,6 +18,12 @@
 		CA91DE30273C48A60060B58E /* NSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA91DE2F273C48A60060B58E /* NSRadioButton.swift */; };
 		CA91DE34273C48C00060B58E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA91DE32273C48C00060B58E /* Constants.swift */; };
 		CA91DE35273C48C00060B58E /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA91DE33273C48C00060B58E /* Signal.swift */; };
+		CAB0B8A12744053500AE7C62 /* FourierService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0B8A02744053500AE7C62 /* FourierService.swift */; };
+		CAB0B8A32744054500AE7C62 /* SignalRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0B8A22744054500AE7C62 /* SignalRecognizer.swift */; };
+		CAB0B8A82744055900AE7C62 /* Fourier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0B8A52744055900AE7C62 /* Fourier.swift */; };
+		CAB0B8A92744055900AE7C62 /* FourierOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0B8A62744055900AE7C62 /* FourierOutput.swift */; };
+		CAB0B8AA2744055900AE7C62 /* Spectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0B8A72744055900AE7C62 /* Spectrum.swift */; };
+		CAB0B8AC2744056C00AE7C62 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0B8AB2744056C00AE7C62 /* Array+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +41,12 @@
 		CA91DE2F273C48A60060B58E /* NSRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRadioButton.swift; sourceTree = "<group>"; };
 		CA91DE32273C48C00060B58E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CA91DE33273C48C00060B58E /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
+		CAB0B8A02744053500AE7C62 /* FourierService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourierService.swift; sourceTree = "<group>"; };
+		CAB0B8A22744054500AE7C62 /* SignalRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalRecognizer.swift; sourceTree = "<group>"; };
+		CAB0B8A52744055900AE7C62 /* Fourier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fourier.swift; sourceTree = "<group>"; };
+		CAB0B8A62744055900AE7C62 /* FourierOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourierOutput.swift; sourceTree = "<group>"; };
+		CAB0B8A72744055900AE7C62 /* Spectrum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spectrum.swift; sourceTree = "<group>"; };
+		CAB0B8AB2744056C00AE7C62 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		D80C7D722C3B7A49083CFC20 /* Pods-SignalCorrelation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignalCorrelation.debug.xcconfig"; path = "Target Support Files/Pods-SignalCorrelation/Pods-SignalCorrelation.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +74,8 @@
 		CA2ED8D92741AB2600B6C77A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CAB0B8A02744053500AE7C62 /* FourierService.swift */,
+				CAB0B8A22744054500AE7C62 /* SignalRecognizer.swift */,
 				CA2ED8DA2741AB8000B6C77A /* Сorrelator.swift */,
 			);
 			path = Helpers;
@@ -137,6 +151,7 @@
 		CA91DE2B273C48960060B58E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CAB0B8AB2744056C00AE7C62 /* Array+Extensions.swift */,
 				CA91DE2C273C48960060B58E /* NSViewController+Extensions.swift */,
 			);
 			path = Extensions;
@@ -153,10 +168,21 @@
 		CA91DE31273C48C00060B58E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CAB0B8A42744055900AE7C62 /* Fourier */,
 				CA91DE32273C48C00060B58E /* Constants.swift */,
 				CA91DE33273C48C00060B58E /* Signal.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CAB0B8A42744055900AE7C62 /* Fourier */ = {
+			isa = PBXGroup;
+			children = (
+				CAB0B8A52744055900AE7C62 /* Fourier.swift */,
+				CAB0B8A62744055900AE7C62 /* FourierOutput.swift */,
+				CAB0B8A72744055900AE7C62 /* Spectrum.swift */,
+			);
+			path = Fourier;
 			sourceTree = "<group>";
 		};
 		FED05C80093617569006660A /* Frameworks */ = {
@@ -282,13 +308,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA91DE34273C48C00060B58E /* Constants.swift in Sources */,
+				CAB0B8AA2744055900AE7C62 /* Spectrum.swift in Sources */,
 				CA91DE35273C48C00060B58E /* Signal.swift in Sources */,
+				CAB0B8AC2744056C00AE7C62 /* Array+Extensions.swift in Sources */,
 				CA91DE2D273C48960060B58E /* NSViewController+Extensions.swift in Sources */,
 				CA91DE1B273C35C90060B58E /* ViewController.swift in Sources */,
+				CAB0B8A12744053500AE7C62 /* FourierService.swift in Sources */,
 				CA91DE30273C48A60060B58E /* NSRadioButton.swift in Sources */,
 				CA91DE19273C35C90060B58E /* AppDelegate.swift in Sources */,
+				CAB0B8A92744055900AE7C62 /* FourierOutput.swift in Sources */,
 				CA2ED8DB2741AB8000B6C77A /* Сorrelator.swift in Sources */,
 				CA2ED8D827419D8500B6C77A /* ViewModel.swift in Sources */,
+				CAB0B8A82744055900AE7C62 /* Fourier.swift in Sources */,
+				CAB0B8A32744054500AE7C62 /* SignalRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
