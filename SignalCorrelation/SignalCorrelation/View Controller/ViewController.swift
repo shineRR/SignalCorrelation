@@ -107,11 +107,13 @@ class ViewController: NSViewController {
     private func processCorrelation() {
         guard let fType = SignalType(rawValue: self.signalComboBox.indexOfSelectedItem) else { return }
         var sSignal: Signal?
-        let fSignal = self.createSignal(with: SignalType[fType], amplitude: self.fAmplitudeTextField.floatValue,
+        let fSignal = self.createSignal(with: SignalType[fType],
+                                        amplitude: self.fAmplitudeTextField.floatValue,
                                         freq: self.fFreqTextField.floatValue,
                                         phase: self.fPhaseTextField.floatValue)
         if let sType = SignalType(rawValue: self.secondSignalComboBox.indexOfSelectedItem) {
-            sSignal = self.createSignal(with: SignalType[sType], amplitude: self.sAmplitudeTextField.floatValue,
+            sSignal = self.createSignal(with: SignalType[sType],
+                                        amplitude: self.sAmplitudeTextField.floatValue,
                                         freq: self.sFreqTextField.floatValue,
                                         phase: self.sPhaseTextField.floatValue)
         }

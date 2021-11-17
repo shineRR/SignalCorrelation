@@ -36,7 +36,7 @@ final class Сorrelator {
         for n in 0..<N {
             var sum: Float = 0.0
             for m in 0..<N {
-                sum += fValues[m] * sValues[(m + n + N) % N]
+                sum += fValues[m] * sValues[(m + n) % N]
             }
             result.append(sum / Float(N))
         }
