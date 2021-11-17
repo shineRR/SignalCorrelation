@@ -66,10 +66,10 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
     private let directTimeRS = ReplaySubject<String>.create(bufferSize: 1)
     private let fastTimeRS = ReplaySubject<String>.create(bufferSize: 1)
     
-    private let fSignalRS = ReplaySubject<[Float]>.create(bufferSize: 1)
-    private let sSignalRS = ReplaySubject<[Float]>.create(bufferSize: 1)
-    private let directSignalRS = ReplaySubject<[Float]>.create(bufferSize: 1)
-    private let fastSignalRS = ReplaySubject<[Float]>.create(bufferSize: 1)
+    private let fSignalBehaviorRelay = BehaviorRelay<[Float]>(value: [])
+    private let sSignalBehaviorRelay = BehaviorRelay<[Float]>(value: [])
+    private let directSignalBehaviorRelay = BehaviorRelay<[Float]>(value: [])
+    private let fastSignalBehaviorRelay = BehaviorRelay<[Float]>(value: [])
     
     // MARK: - Properties
     private let disposeBag = DisposeBag()
@@ -82,10 +82,10 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
         self.fastTime = self.fastTimeRS
         self.firstSignal = self.firstSignalRS
         self.secondSignal = self.secondSignalRS
-        self.fSignal = self.fSignalRS
-        self.sSignal = self.sSignalRS
-        self.directSignal = self.directSignalRS
-        self.fastSignal = self.fastSignalRS
+        self.fSignal = self.fSignalBehaviorRelay.asObservable()
+        self.sSignal = self.sSignalBehaviorRelay.asObservable()
+        self.directSignal = self.directSignalBehaviorRelay.asObservable()
+        self.fastSignal = self.fastSignalBehaviorRelay.asObservable()
         
         self.setupBindings()
     }
@@ -114,16 +114,16 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
     
     private func sendValues(fSignal: [Float] = [], sSignal: [Float] = [],
                             dSignal: [Float] = [], fastSignal: [Float] = []) {
-        self.fSignalRS.onNext(fSignal)
-        self.sSignalRS.onNext(sSignal)
-        self.directSignalRS.onNext(dSignal)
-        self.fastSignalRS.onNext(fastSignal)
+        self.fSignalBehaviorRelay.accept(fSignal)
+        self.sSignalBehaviorRelay.accept(sSignal)
+        self.directSignalBehaviorRelay.accept(dSignal)
+        self.fastSignalBehaviorRelay.accept(fastSignal)
     }
     
     private func prepareWork(for fValues: [Float], and sValues: [Float]) {
         self.performWork({ Сorrelator.correlation(for: fValues, and: sValues) })
             .subscribe(onSuccess: { [weak self] values, time in
-                self?.directSignalRS.onNext(values)
+                self?.directSignalBehaviorRelay.accept(values)
                 self?.directTimeRS.onNext(time)
             })
             .disposed(by: self.disposeBag)
@@ -131,7 +131,7 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
         
         self.performWork({ Сorrelator.fastCorrelation(for: fValues, and: sValues) })
             .subscribe(onSuccess: { [weak self] values, time in
-                self?.fastSignalRS.onNext(values)
+                self?.fastSignalBehaviorRelay.accept(values)
                 self?.fastTimeRS.onNext(time)
             })
             .disposed(by: self.disposeBag)
